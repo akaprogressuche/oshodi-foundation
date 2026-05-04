@@ -15,7 +15,7 @@ export function VisionSection() {
           {/* Left: eyebrow */}
           <div className="lg:col-span-3">
             <Reveal>
-              <p className="text-xs uppercase tracking-[0.3em] text-black/70 font-medium">
+              <p className="text-xs uppercase tracking-[0.3em] text-black font-bold">
                 Our Vision
               </p>
             </Reveal>

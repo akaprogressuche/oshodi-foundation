@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { photos } from "../../data/photos";
+import { Typewriter } from "../Typewriter";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -19,7 +20,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-inverted-bg text-inverted-fg"
+      className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-inverted-bg text-inverted-fg"
     >
       {/* Background photo with parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 will-change-transform">
@@ -38,41 +39,51 @@ export function HeroSection() {
       {/* Centered content */}
       <motion.div
         style={{ y: textY, opacity: textOpacity }}
-        className="relative z-10 mx-auto max-w-5xl px-6 lg:px-10 py-32 text-center"
+        className="relative z-10 mx-auto max-w-5xl px-6 lg:px-10 py-24 md:py-28 text-center"
       >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-xs uppercase tracking-[0.4em] text-accent font-medium"
+          className="text-xs uppercase tracking-[0.4em] text-accent font-semibold"
         >
           The Oshodi Family Foundation
         </motion.p>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05]"
+          className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
         >
-          Empowering Families.<br />
-          Nourishing Communities.<br />
-          <span className="text-accent">Building Futures.</span>
+          We are{" "}
+          <span className="text-accent">
+            <Typewriter
+              phrases={[
+                "empowering families.",
+                "nourishing communities.",
+                "building futures.",
+              ]}
+            />
+          </span>
         </motion.h1>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="mt-10 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-white/80"
+          className="mt-8 mx-auto max-w-2xl text-base md:text-lg leading-relaxed text-white/80"
         >
           A community-centered nonprofit committed to strengthening families,
           addressing food insecurity, and expanding access to education and
           leadership opportunities in underserved communities.
         </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link
             href="/contact"
@@ -96,12 +107,12 @@ export function HeroSection() {
         transition={{ duration: 1, delay: 1.4 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
       >
-        <div className="flex flex-col items-center gap-2 text-white/50 text-xs uppercase tracking-widest">
+        <div className="flex flex-col items-center gap-2 text-white/60 text-xs uppercase tracking-widest">
           <span>Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="h-8 w-px bg-white/30"
+            className="h-8 w-px bg-white/40"
           />
         </div>
       </motion.div>

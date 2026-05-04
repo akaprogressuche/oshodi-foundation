@@ -1,26 +1,78 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 export function HeroSection() {
-  return (
-    <section className="relative bg-inverted-bg text-inverted-fg overflow-hidden">
-      {/* Decorative red accent bar — matches the proposal's red vertical rule */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-accent/30 hidden lg:block" />
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10 pt-20 pb-24 md:pt-32 md:pb-40">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent font-medium">
+  return (
+    <section
+      ref={ref}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-inverted-bg text-inverted-fg"
+    >
+      {/* Background photo with parallax */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 will-change-transform">
+        <Image
+          src="/images/oshodi/hero.jpg"
+          alt="Volunteers organizing community food donations"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+      </motion.div>
+
+      {/* Centered content */}
+      <motion.div
+        style={{ y: textY, opacity: textOpacity }}
+        className="relative z-10 mx-auto max-w-5xl px-6 lg:px-10 py-32 text-center"
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-xs uppercase tracking-[0.4em] text-accent font-medium"
+        >
           The Oshodi Family Foundation
-        </p>
-        <h1 className="mt-8 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] max-w-4xl">
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] text-balance"
+        >
           Empowering Families.<br />
           Nourishing Communities.<br />
           <span className="text-accent">Building Futures.</span>
-        </h1>
-        <p className="mt-10 max-w-2xl text-lg md:text-xl leading-relaxed text-white/70">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.7 }}
+          className="mt-10 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-white/80"
+        >
           A community-centered nonprofit committed to strengthening families,
           addressing food insecurity, and expanding access to education and
           leadership opportunities in underserved communities.
-        </p>
-        <div className="mt-12 flex flex-col sm:flex-row gap-4">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9 }}
+          className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+        >
           <Link
             href="/contact"
             className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity"
@@ -29,12 +81,29 @@ export function HeroSection() {
           </Link>
           <Link
             href="#initiatives"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white/5 transition-colors"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
           >
             Explore Our Work
           </Link>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.4 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+      >
+        <div className="flex flex-col items-center gap-2 text-white/50 text-xs uppercase tracking-widest">
+          <span>Scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="h-8 w-px bg-white/30"
+          />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

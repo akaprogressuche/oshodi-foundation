@@ -2,6 +2,7 @@ import { HeroSection } from "./components/sections/HeroSection";
 import { AboutSection } from "./components/sections/AboutSection";
 import { MissionSection } from "./components/sections/MissionSection";
 import { VisionSection } from "./components/sections/VisionSection";
+import { FounderSection } from "./components/sections/FounderSection";
 import { InitiativesSection } from "./components/sections/InitiativesSection";
 import { ImpactSection } from "./components/sections/ImpactSection";
 import { CTASection } from "./components/sections/CTASection";
@@ -13,6 +14,7 @@ export default function HomePage() {
       <AboutSection />
       <MissionSection />
       <VisionSection />
+      <FounderSection />
       <InitiativesSection />
       <ImpactSection />
       <CTASection />

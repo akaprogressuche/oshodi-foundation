@@ -58,6 +58,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/news" className="hover:text-accent transition-colors">
+                News
+              </Link>
+            </li>
+            <li>
               <Link href="/get-involved" className="hover:text-accent transition-colors">
                 Get Involved
               </Link>

@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { SuccessModal } from "./SuccessModal";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [formError, setFormError] = useState<string | null>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,8 +36,9 @@ export function ContactForm() {
         throw new Error(data.error ?? "Something went wrong.");
       }
 
-      setStatus("success");
       form.reset();
+      setStatus("idle");
+      setShowSuccess(true);
     } catch (err) {
       setStatus("error");
       setFormError(
@@ -46,60 +49,51 @@ export function ContactForm() {
     }
   }
 
-  if (status === "success") {
-    return (
-      <div className="rounded-lg border border-accent/40 bg-accent/5 p-8">
-        <h3 className="text-2xl font-semibold tracking-tight">Thank you.</h3>
-        <p className="mt-3 text-muted-foreground">
-          Your message reached us. We&rsquo;ll be in touch shortly.
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-sm font-medium text-accent hover:opacity-80 transition-opacity"
-        >
-          Send another message
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Field label="Your name" name="name" required />
-        <Field label="Email" name="email" type="email" required />
-      </div>
+    <>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Field label="Your name" name="name" required />
+          <Field label="Email" name="email" type="email" required />
+        </div>
 
-      <Field label="Organization (optional)" name="organization" />
+        <Field label="Organization (optional)" name="organization" />
 
-      <div>
-        <label
-          htmlFor="message"
-          className="block text-xs uppercase tracking-widest text-muted-foreground font-medium"
+        <div>
+          <label
+            htmlFor="message"
+            className="block text-xs uppercase tracking-widest text-muted-foreground font-medium"
+          >
+            How can we help?
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={6}
+            className="mt-2 block w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition"
+            placeholder="Tell us a bit about why you're reaching out…"
+          />
+        </div>
+
+        {formError && <p className="text-sm text-accent">{formError}</p>}
+
+        <button
+          type="submit"
+          disabled={status === "submitting"}
+          className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
         >
-          How can we help?
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={6}
-          className="mt-2 block w-full rounded-md border border-border bg-background px-4 py-3 text-base text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition"
-          placeholder="Tell us a bit about why you're reaching out…"
-        />
-      </div>
+          {status === "submitting" ? "Sending…" : "Send Message"}
+        </button>
+      </form>
 
-      {formError && <p className="text-sm text-accent">{formError}</p>}
-
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
-      >
-        {status === "submitting" ? "Sending…" : "Send Message"}
-      </button>
-    </form>
+      <SuccessModal
+        open={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        title="Thank you."
+        message="Your message reached us. We'll be in touch shortly."
+      />
+    </>
   );
 }
 

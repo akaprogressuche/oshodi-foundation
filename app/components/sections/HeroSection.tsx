@@ -52,7 +52,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] text-balance"
+          className="mt-10 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05]"
         >
           Empowering Families.<br />
           Nourishing Communities.<br />

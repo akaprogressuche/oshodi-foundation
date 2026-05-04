@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState } from "react";
+import { HighlightedText } from "../HighlightedText";
 import { photos } from "../../data/photos";
 
 const stats = [
@@ -46,7 +47,7 @@ export function ImpactSection() {
       id="impact"
       className="relative bg-inverted-bg text-inverted-fg overflow-hidden"
     >
-      {/* Background image with parallax-feeling fade */}
+      {/* Background image fade */}
       <div className="absolute inset-0 opacity-25">
         <Image
           src={photos.impact}
@@ -58,57 +59,62 @@ export function ImpactSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6 lg:px-10 py-24 md:py-40 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-xs uppercase tracking-[0.3em] text-accent font-medium"
-        >
-          Our Impact
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 mx-auto max-w-3xl text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-balance"
-        >
-          Measured in lives, not metrics.
-        </motion.h2>
-
-        <dl className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-10 py-24 md:py-40">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left: eyebrow + title */}
+          <div className="lg:col-span-6">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-              className="border-t border-white/20 pt-6 text-center"
+              transition={{ duration: 0.6 }}
+              className="text-xs uppercase tracking-[0.3em] text-accent font-medium"
             >
-              <dt className="text-sm uppercase tracking-widest text-white/60">
-                {stat.label}
-              </dt>
-              <dd className="mt-4 text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-accent">
-                <CountUp to={stat.value} suffix={stat.suffix} />
-              </dd>
-            </motion.div>
-          ))}
-        </dl>
+              Our Impact
+            </motion.p>
+            <HighlightedText
+              as="h2"
+              startOpacity={0.2}
+              className="mt-8 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-balance"
+            >
+              Measured in lives, not metrics.
+            </HighlightedText>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="mt-8 max-w-md text-lg text-white/60 leading-relaxed"
+            >
+              Through the John Oshodi Scholarship of Resilience and our
+              broader programs, we&rsquo;ve built early momentum — and the
+              work is just getting started.
+            </motion.p>
+          </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="mt-16 mx-auto max-w-2xl text-lg text-white/60 leading-relaxed"
-        >
-          Through the John Oshodi Scholarship of Resilience and our broader
-          programs, we&rsquo;ve built early momentum — and the work is just
-          getting started.
-        </motion.p>
+          {/* Right: stats */}
+          <div className="lg:col-span-6">
+            <dl className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-12 lg:gap-10">
+              {stats.map((stat, idx) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
+                  className="border-t border-white/20 pt-6 text-left"
+                >
+                  <dt className="text-sm uppercase tracking-widest text-white/60">
+                    {stat.label}
+                  </dt>
+                  <dd className="mt-2 text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-accent">
+                    <CountUp to={stat.value} suffix={stat.suffix} />
+                  </dd>
+                </motion.div>
+              ))}
+            </dl>
+          </div>
+        </div>
       </div>
     </section>
   );

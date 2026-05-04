@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState } from "react";
+import { photos } from "../../data/photos";
 
 const stats = [
   { value: 2023, label: "Founded", suffix: "" },
@@ -48,7 +49,7 @@ export function ImpactSection() {
       {/* Background image with parallax-feeling fade */}
       <div className="absolute inset-0 opacity-25">
         <Image
-          src="/images/oshodi/impact.jpg"
+          src={photos.impact}
           alt=""
           fill
           sizes="100vw"

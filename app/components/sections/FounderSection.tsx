@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "../Reveal";
+import { HighlightedText } from "../HighlightedText";
+import { photos } from "../../data/photos";
 
 export function FounderSection() {
   return (
@@ -19,7 +21,7 @@ export function FounderSection() {
             <div className="absolute inset-0 rounded-full border-2 border-accent" />
             <div className="absolute inset-2 rounded-full overflow-hidden">
               <Image
-                src="/images/oshodi/founder.png"
+                src={photos.founder}
                 alt="John Oshodi, Founder of Relevant Technologies"
                 fill
                 sizes="(max-width: 768px) 192px, 224px"
@@ -35,35 +37,20 @@ export function FounderSection() {
           </h2>
         </Reveal>
 
-        <Reveal delay={0.3}>
-          <div className="mt-10 mx-auto max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground text-left md:text-center">
-            <p>
-              John Oshodi is a technology executive and entrepreneur with over
-              30 years of experience in business strategy, data systems, and
-              industrial technology. As founder of{" "}
-              <span className="text-foreground font-medium">
-                Relevant Technologies
-              </span>
-              , he has led the delivery of innovative solutions across
-              manufacturing, aerospace, healthcare, and defense — serving
-              clients globally.
-            </p>
-            <p>
-              Originally migrating to the United States in the early 1980s —
-              thousands of miles from family, without an established network —
-              John built his path through resilience, discipline, and a
-              commitment to growth.
-            </p>
-            <p>
-              A father of nine, he has always prioritized formal education and
-              entrepreneurship in equal measure, instilling these values within
-              his family and the communities he serves.
-            </p>
-          </div>
-        </Reveal>
+        <div className="mt-10 mx-auto max-w-2xl space-y-6 text-lg md:text-xl leading-relaxed text-foreground">
+          <HighlightedText as="p">
+            John Oshodi is a technology executive and entrepreneur with over 30 years of experience in business strategy, data systems, and industrial technology. As founder of Relevant Technologies, he has led the delivery of innovative solutions across manufacturing, aerospace, healthcare, and defense — serving clients globally.
+          </HighlightedText>
+          <HighlightedText as="p">
+            Originally migrating to the United States in the early 1980s — thousands of miles from family, without an established network — John built his path through resilience, discipline, and a commitment to growth.
+          </HighlightedText>
+          <HighlightedText as="p">
+            A father of nine, he has always prioritized formal education and entrepreneurship in equal measure, instilling these values within his family and the communities he serves.
+          </HighlightedText>
+        </div>
 
         <Reveal delay={0.4}>
-          <div className="mt-12 mx-auto max-w-2xl border-t border-border pt-10">
+          <div className="mt-14 mx-auto max-w-2xl border-t border-border pt-10">
             <p className="text-2xl md:text-3xl font-medium tracking-tight text-foreground italic leading-snug text-balance">
               &ldquo;In honor of his impact, the John Oshodi Scholarship of
               Resilience supports individuals overcoming adversity in pursuit

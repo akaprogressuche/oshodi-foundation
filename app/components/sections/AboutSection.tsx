@@ -1,5 +1,7 @@
 import { Reveal } from "../Reveal";
 import { ParallaxImage } from "../ParallaxImage";
+import { HighlightedText } from "../HighlightedText";
+import { photos } from "../../data/photos";
 
 export function AboutSection() {
   return (
@@ -15,30 +17,21 @@ export function AboutSection() {
             When families are supported, communities thrive.
           </h2>
         </Reveal>
-        <Reveal delay={0.2}>
-          <div className="mt-10 mx-auto max-w-2xl space-y-6 text-lg leading-relaxed text-muted-foreground">
-            <p>
-              Our work is grounded in the belief that when families are
-              supported and individuals are equipped with opportunity, entire
-              communities can thrive. Through compassionate service and
-              forward-thinking initiatives, we address immediate needs while
-              building long-term pathways for empowerment, stability, and
-              generational impact.
-            </p>
-            <p>
-              By combining direct community support with educational and
-              leadership development programs, we create environments where
-              families are nourished, individuals are empowered, and futures
-              are redefined.
-            </p>
-          </div>
-        </Reveal>
+
+        <div className="mt-12 mx-auto max-w-2xl space-y-8 text-lg md:text-xl leading-relaxed text-foreground">
+          <HighlightedText as="p">
+            Our work is grounded in the belief that when families are supported and individuals are equipped with opportunity, entire communities can thrive. Through compassionate service and forward-thinking initiatives, we address immediate needs while building long-term pathways for empowerment, stability, and generational impact.
+          </HighlightedText>
+          <HighlightedText as="p">
+            By combining direct community support with educational and leadership development programs, we create environments where families are nourished, individuals are empowered, and futures are redefined.
+          </HighlightedText>
+        </div>
       </div>
 
       <Reveal>
         <ParallaxImage
-          src="/images/oshodi/about.jpg"
-          alt="Hands joining together over shared resources — symbolizing community"
+          src={photos.about}
+          alt="Diverse hands stacked together — a symbol of unity and shared purpose"
           className="aspect-[16/9] md:aspect-[21/9] w-full"
           sizes="100vw"
         />

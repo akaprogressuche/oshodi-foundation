@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { photos } from "../../data/photos";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -23,8 +24,8 @@ export function HeroSection() {
       {/* Background photo with parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 will-change-transform">
         <Image
-          src="/images/oshodi/hero.jpg"
-          alt="Volunteers organizing community food donations"
+          src={photos.hero}
+          alt="A multi-generational community gathered around a shared table"
           fill
           sizes="100vw"
           priority

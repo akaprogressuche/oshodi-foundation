@@ -1,4 +1,5 @@
 import { Reveal } from "../Reveal";
+import { HighlightedText } from "../HighlightedText";
 
 export function MissionSection() {
   return (
@@ -18,15 +19,13 @@ export function MissionSection() {
             innovators of tomorrow.
           </h2>
         </Reveal>
-        <Reveal delay={0.2}>
-          <p className="mt-10 mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            We serve with compassion, uplift with intention, and build pathways
-            that foster sustainability, leadership, and generational impact.
-            Through meaningful partnerships and community-driven initiatives, we
-            strengthen families today while investing in the leaders and
-            innovators of tomorrow.
-          </p>
-        </Reveal>
+
+        <HighlightedText
+          as="p"
+          className="mt-12 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-foreground"
+        >
+          We serve with compassion, uplift with intention, and build pathways that foster sustainability, leadership, and generational impact. Through meaningful partnerships and community-driven initiatives, we strengthen families today while investing in the leaders and innovators of tomorrow.
+        </HighlightedText>
       </div>
     </section>
   );

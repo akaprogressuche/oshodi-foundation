@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "../Reveal";
+import { HighlightedText } from "../HighlightedText";
+import { photos } from "../../data/photos";
 
 export function CTASection() {
   return (
@@ -8,7 +10,7 @@ export function CTASection() {
       {/* Faint full-bleed photo backdrop */}
       <div className="absolute inset-0 opacity-[0.06]">
         <Image
-          src="/images/oshodi/contact.jpg"
+          src={photos.contact}
           alt=""
           fill
           sizes="100vw"
@@ -27,14 +29,14 @@ export function CTASection() {
             Let&rsquo;s get to work, together.
           </h2>
         </Reveal>
-        <Reveal delay={0.2}>
-          <p className="mt-8 mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Every partnership strengthens our ability to serve families today
-            while investing in the leaders of tomorrow. Whether you&rsquo;re here
-            to collaborate, support a program, or learn more — we&rsquo;d
-            welcome the conversation.
-          </p>
-        </Reveal>
+
+        <HighlightedText
+          as="p"
+          className="mt-10 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed text-foreground"
+        >
+          Every partnership strengthens our ability to serve families today while investing in the leaders of tomorrow. Whether you&apos;re here to collaborate, support a program, or learn more — we&apos;d welcome the conversation.
+        </HighlightedText>
+
         <Reveal delay={0.3}>
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
             <Link

@@ -2,24 +2,32 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 
-const navLinks = [
-  { label: "About", href: "/#about" },
-  { label: "Mission", href: "/#mission" },
-  { label: "Initiatives", href: "/#initiatives" },
+type NavLink = {
+  label: string;
+  href: string;
+  /** ID of the homepage section this link tracks (only meaningful on /) */
+  sectionId?: string;
+};
+
+const navLinks: NavLink[] = [
+  { label: "About", href: "/#about", sectionId: "about" },
+  { label: "Initiatives", href: "/#initiatives", sectionId: "initiatives" },
+  { label: "Get Involved", href: "/get-involved" },
   { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const pathname = usePathname();
 
-  // Close mobile menu on resize to desktop or route change
+  // Close mobile menu when route changes
   useEffect(() => {
-    const close = () => setOpen(false);
-    window.addEventListener("resize", close);
-    return () => window.removeEventListener("resize", close);
-  }, []);
+    setOpen(false);
+  }, [pathname]);
 
   // Lock body scroll when menu open
   useEffect(() => {
@@ -28,6 +36,42 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Track active section on homepage via IntersectionObserver
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection(null);
+      return;
+    }
+    const sectionIds = navLinks
+      .map((l) => l.sectionId)
+      .filter((id): id is string => Boolean(id));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -55% 0px", threshold: 0 },
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const isActive = (link: NavLink) => {
+    if (link.href === pathname) return true;
+    if (pathname === "/" && link.sectionId && link.sectionId === activeSection)
+      return true;
+    return false;
+  };
 
   return (
     <>
@@ -39,25 +83,41 @@ export function Header() {
           >
             <span className="text-foreground">OSHODI</span>
             <span className="text-accent">FAMILY</span>
-            <span className="text-foreground hidden sm:inline">FOUNDATION</span>
+            <span className="text-foreground hidden sm:inline">
+              FOUNDATION
+            </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+            {navLinks.map((link) => {
+              const active = isActive(link);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-3 py-2 transition-colors ${
+                    active
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      className="absolute left-3 right-3 -bottom-0.5 h-0.5 bg-accent rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-2">
             <Link
-              href="/contact"
+              href="/get-involved"
               className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
               Get Involved
@@ -110,22 +170,27 @@ export function Header() {
             className="fixed inset-0 z-30 md:hidden bg-inverted-bg text-inverted-fg pt-20"
           >
             <nav className="px-6 lg:px-10 py-12 flex flex-col gap-2">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.4 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block py-4 text-3xl font-semibold tracking-tight hover:text-accent transition-colors"
+              {navLinks.map((link, i) => {
+                const active = isActive(link);
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 * i, duration: 0.4 }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={`block py-4 text-3xl font-semibold tracking-tight transition-colors ${
+                        active ? "text-accent" : "hover:text-accent"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -133,7 +198,7 @@ export function Header() {
                 className="mt-8"
               >
                 <Link
-                  href="/contact"
+                  href="/get-involved"
                   onClick={() => setOpen(false)}
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium"
                 >

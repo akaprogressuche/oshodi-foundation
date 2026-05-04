@@ -20,7 +20,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-inverted-bg text-inverted-fg"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-inverted-bg text-inverted-fg"
     >
       {/* Background photo with parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 will-change-transform">

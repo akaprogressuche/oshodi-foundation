@@ -43,8 +43,14 @@ export function HighlightedText({
   const words = children.split(" ");
   const Tag = motion[as];
 
+  // motion's useScroll needs the target to have non-static position so it can
+  // measure scroll offsets correctly. `relative` is enough.
+  const finalClassName = className.includes("relative")
+    ? className
+    : `relative ${className}`;
+
   return (
-    <Tag ref={ref as never} className={className}>
+    <Tag ref={ref as never} className={finalClassName}>
       {words.map((word, i) => {
         const wordStart = i / words.length;
         const wordEnd = wordStart + 1 / words.length;

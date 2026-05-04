@@ -35,7 +35,8 @@
   html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
+    /* Lenis handles smooth scrolling — using both CSS scroll-behavior and Lenis
+       creates conflicting scroll engines and freezes the page mid-section. */
   }
   body {
     background: var(--background);

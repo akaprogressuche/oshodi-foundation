@@ -1,8 +1,35 @@
 import Link from "next/link";
+import { NewsletterForm } from "./NewsletterForm";
 
 export function Footer() {
   return (
     <footer className="bg-inverted-bg text-inverted-fg">
+      {/* Top: newsletter band */}
+      <div className="border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-12 md:py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-start md:items-center">
+          <div className="md:col-span-5">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent font-semibold">
+              Stay Informed
+            </p>
+            <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight leading-tight text-balance">
+              Updates from the Foundation, straight to your inbox.
+            </h3>
+          </div>
+          <div className="md:col-span-7 md:pl-8 md:border-l md:border-white/10">
+            <NewsletterForm />
+            <p className="mt-3 text-xs text-white/50 max-w-md">
+              Occasional updates on programs, beneficiary stories, and ways to
+              help. Unsubscribe anytime. We respect your{" "}
+              <Link href="/privacy" className="underline hover:text-white">
+                privacy
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Middle: nav + contact */}
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <p className="font-bold tracking-tight text-lg leading-tight">
@@ -68,6 +95,7 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Bottom: copyright + legal */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/40">
           <p>

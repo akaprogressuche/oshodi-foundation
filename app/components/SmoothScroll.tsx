@@ -1,23 +1,29 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
+
+let lenisInstance: Lenis | null = null;
 
 /**
  * Mounts a global Lenis smooth-scroll instance and routes anchor-link clicks
  * (`<a href="#section">`) through `lenis.scrollTo` so they animate properly.
- * Mount once near the root of the app.
+ * Also resets scroll to top on every route change so nav clicks always land
+ * at the top of the destination page.
  */
 export function SmoothScroll() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    const lenis = new Lenis({
+    lenisInstance = new Lenis({
       lerp: 0.1,
       duration: 1.2,
     });
 
     let rafId = 0;
     function raf(time: number) {
-      lenis.raf(time);
+      lenisInstance?.raf(time);
       rafId = requestAnimationFrame(raf);
     }
     rafId = requestAnimationFrame(raf);
@@ -32,7 +38,7 @@ export function SmoothScroll() {
       const el = document.querySelector(href);
       if (!el) return;
       event.preventDefault();
-      lenis.scrollTo(el as HTMLElement, { offset: -64 });
+      lenisInstance?.scrollTo(el as HTMLElement, { offset: -64 });
     };
 
     document.addEventListener("click", handleAnchorClick);
@@ -40,9 +46,21 @@ export function SmoothScroll() {
     return () => {
       document.removeEventListener("click", handleAnchorClick);
       cancelAnimationFrame(rafId);
-      lenis.destroy();
+      lenisInstance?.destroy();
+      lenisInstance = null;
     };
   }, []);
+
+  // Reset scroll to top on route change. Skip when the URL has a hash
+  // (anchor link to an in-page section).
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) return;
+    if (lenisInstance) {
+      lenisInstance.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
 
   return null;
 }

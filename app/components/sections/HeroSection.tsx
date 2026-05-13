@@ -56,8 +56,11 @@ export function HeroSection() {
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
         >
-          We are{" "}
-          <span className="text-accent">
+          We are
+          {/* Block + whitespace-nowrap pins the typewriter to its own
+              single line so the longest phrase never wraps to a 2nd
+              row and snaps content below it. */}
+          <span className="block text-accent whitespace-nowrap">
             <Typewriter
               phrases={[
                 "empowering families.",

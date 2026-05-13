@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    google: "R0avsVSbltM7-zEGQKLoPcitIIobnbSfnQzoP8HP29A",
+  },
 };
 
 const organizationSchema = {

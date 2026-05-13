@@ -54,12 +54,13 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
+          className="mt-8 w-full max-w-full overflow-hidden text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
         >
           We are
-          {/* Block + whitespace-nowrap pins the typewriter to its own
-              single line so the longest phrase never wraps to a 2nd
-              row and snaps content below it. */}
+          {/* `block` + `whitespace-nowrap` pins the typewriter to a
+              single line so the longest phrase never wraps. The parent
+              H1 gets `overflow-hidden` so the inner span can't push
+              sibling elements (subtitle, buttons) out of position. */}
           <span className="block text-accent whitespace-nowrap">
             <Typewriter
               phrases={[
@@ -75,7 +76,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="mt-8 mx-auto max-w-2xl text-base md:text-lg leading-relaxed text-white/80"
+          className="mt-8 w-full mx-auto max-w-2xl text-base md:text-lg leading-relaxed text-white/80"
         >
           A community-centered nonprofit committed to strengthening families,
           addressing food insecurity, and expanding access to education and

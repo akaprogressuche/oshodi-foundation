@@ -86,17 +86,17 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+          className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center"
         >
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex items-center justify-center min-w-[180px] px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity"
           >
             Get Involved
           </Link>
           <Link
             href="#initiatives"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
+            className="inline-flex items-center justify-center min-w-[180px] px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
           >
             Explore Our Work
           </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
@@ -80,13 +81,17 @@ export function Header() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10 h-16 flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-baseline gap-2 font-bold tracking-tight"
+            aria-label="Oshodi Family Foundation home"
+            className="inline-flex items-center"
           >
-            <span className="text-foreground">OSHODI</span>
-            <span className="text-accent">FAMILY</span>
-            <span className="text-foreground hidden sm:inline">
-              FOUNDATION
-            </span>
+            <Image
+              src="/logos/oshodi.svg"
+              alt="Oshodi Family Foundation"
+              width={4193}
+              height={689}
+              priority
+              className="h-7 md:h-8 w-auto"
+            />
           </Link>
 
           {/* Desktop nav */}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { NewsletterForm } from "./NewsletterForm";
 
 export function Footer() {
@@ -32,11 +33,14 @@ export function Footer() {
       {/* Middle: nav + contact */}
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2">
-          <p className="font-bold tracking-tight text-lg leading-tight">
-            OSHODI<br />
-            <span className="text-accent">FAMILY</span><br />
-            FOUNDATION
-          </p>
+          <Image
+            src="/logos/oshodi.svg"
+            alt="Oshodi Family Foundation"
+            width={4193}
+            height={689}
+            className="h-9 w-auto invert"
+          />
+          <span className="sr-only">Oshodi Family Foundation</span>
           <p className="mt-6 text-sm text-white/60 max-w-xs">
             Empowering families. Nourishing communities. Building futures.
           </p>

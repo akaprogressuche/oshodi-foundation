@@ -49,15 +49,17 @@ export function CTASection() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity"
+                  className="lift-btn justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:bg-accent/90"
                 >
                   Contact the Foundation
+                  <span aria-hidden="true" className="lift-arrow">→</span>
                 </Link>
                 <a
                   href="mailto:info@theoshodifoundation.org"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-foreground/20 text-foreground hover:bg-foreground/5 transition-colors"
+                  className="lift-btn justify-center px-8 py-4 rounded-full border border-foreground/20 text-foreground hover:bg-foreground/5"
                 >
                   Email Us
+                  <span aria-hidden="true" className="lift-arrow">→</span>
                 </a>
               </div>
             </Reveal>

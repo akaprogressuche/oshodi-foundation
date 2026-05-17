@@ -16,6 +16,11 @@
   --inverted-bg: #0a0a0a;
   --inverted-fg: #f5f5f5;
   --border: #e5e7eb;
+
+  /* Canonical motion curves */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-quick: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @theme inline {
@@ -46,5 +51,47 @@
   ::selection {
     background: var(--accent);
     color: var(--accent-foreground);
+  }
+}
+
+/* ===== Motion polish ===== */
+
+.lift-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 300ms var(--ease-out-expo),
+              color 300ms var(--ease-out-expo),
+              transform 400ms var(--ease-out-expo),
+              box-shadow 400ms var(--ease-out-expo),
+              border-color 300ms var(--ease-out-expo);
+}
+.lift-btn:hover { transform: translateY(-2px); }
+.lift-btn .lift-arrow {
+  display: inline-block;
+  transition: transform 400ms var(--ease-out-expo);
+}
+.lift-btn:hover .lift-arrow { transform: translateX(4px); }
+
+.lift-card {
+  transition: transform 500ms var(--ease-out-expo),
+              box-shadow 500ms var(--ease-out-expo),
+              border-color 500ms var(--ease-out-expo);
+}
+.lift-card:hover {
+  /* !important wins over Reveal's inline transform when wrapped */
+  transform: translateY(-4px) !important;
+  box-shadow: 0 1px 2px rgba(10,10,10,0.04), 0 18px 40px -16px rgba(10,10,10,0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -91,15 +91,17 @@ export function HeroSection() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center min-w-[180px] px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity"
+            className="lift-btn inline-flex items-center justify-center min-w-[180px] px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium"
           >
             Get Involved
+            <span aria-hidden="true" className="lift-arrow">→</span>
           </Link>
           <Link
             href="#initiatives"
-            className="inline-flex items-center justify-center min-w-[180px] px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
+            className="lift-btn inline-flex items-center justify-center min-w-[180px] px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10"
           >
             Explore Our Work
+            <span aria-hidden="true" className="lift-arrow">→</span>
           </Link>
         </motion.div>
       </motion.div>

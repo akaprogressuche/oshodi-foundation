@@ -83,15 +83,15 @@ export function FounderSection() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.3}>
-              <div className="mt-12 border-t border-border pt-8">
-                <p className="text-xl md:text-2xl font-medium tracking-tight text-foreground italic leading-snug text-balance">
-                  &ldquo;In honor of his impact, the John Oshodi Scholarship
-                  of Resilience supports individuals overcoming adversity in
-                  pursuit of education and personal growth.&rdquo;
-                </p>
-              </div>
-            </Reveal>
+            <div className="mt-12 border-t border-border pt-8">
+              <HighlightedText
+                as="p"
+                startOpacity={0.2}
+                className="text-xl md:text-2xl font-medium tracking-tight text-foreground italic leading-snug text-balance"
+              >
+                {"“In honor of his impact, the John Oshodi Scholarship of Resilience supports individuals overcoming adversity in pursuit of education and personal growth.”"}
+              </HighlightedText>
+            </div>
           </div>
         </div>
       </div>

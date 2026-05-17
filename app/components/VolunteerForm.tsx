@@ -117,7 +117,7 @@ export function VolunteerForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
+          className="lift-btn justify-center px-8 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:bg-accent/90 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "submitting" ? "Sending…" : "Count Me In"}
         </button>

@@ -95,7 +95,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+          <nav className="hidden lg:flex items-center gap-1 text-sm font-medium">
             {navLinks.map((link) => {
               const active = isActive(link);
               return (
@@ -124,7 +124,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/get-involved"
-              className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              className="hidden lg:inline-flex items-center px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
               Get Involved
             </Link>
@@ -135,7 +135,7 @@ export function Header() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="md:hidden p-2 -mr-2 inline-flex items-center justify-center text-foreground"
+              className="lg:hidden p-2 -mr-2 inline-flex items-center justify-center text-foreground"
             >
               <svg
                 width="24"
@@ -173,7 +173,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-30 md:hidden bg-inverted-bg text-inverted-fg pt-20"
+            className="fixed inset-0 z-30 lg:hidden bg-inverted-bg text-inverted-fg pt-20"
           >
             <nav className="px-6 lg:px-10 py-12 flex flex-col gap-2">
               {navLinks.map((link, i) => {

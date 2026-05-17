@@ -35,7 +35,7 @@ export function InitiativesSection() {
               delay={idx * 0.1}
               direction="up"
               as="article"
-              className="group relative bg-background rounded-lg overflow-hidden border border-border hover:border-accent/40 transition-colors duration-500"
+              className="group lift-card will-change-transform relative bg-background rounded-lg overflow-hidden border border-border hover:border-accent/40"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                 <Image
